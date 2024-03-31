@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+# 'django-insecure-%)$#%p=23e92f$+@-)1)g@y1y=xr76k&pc0)j_aaf-7h1ob+b_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,6 +71,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
+#     }
+# }
 
 DATABASES = {
     "default": {
