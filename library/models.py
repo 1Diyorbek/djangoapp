@@ -6,3 +6,10 @@ class Book(models.Model):
     description = models.TextField()
     author = models.CharField(max_length=40)
     price = models.FloatField()
+
+    def __str__(self):
+        return f"""
+        Title -> {self.title}
+        description -> {self.description}
+        author -> {self.author}
+        price -> {self.price}"""
