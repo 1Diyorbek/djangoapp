@@ -14,7 +14,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=25)
     description = models.TextField()
-    price = models.FloatField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     def __str__(self):

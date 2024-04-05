@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # package
     'django_extensions',
+    'import_export',
     
     # apps
     'library',
