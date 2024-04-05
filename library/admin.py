@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Book, Author, BookingBook, Comment
 from import_export.admin import ImportExportModelAdmin
 
+
 @admin.register(Author)
 class AuthorAdmin(ImportExportModelAdmin):
     list_display = ("id", "first_name", "last_name", "birt_date")

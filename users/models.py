@@ -18,7 +18,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     username = models.CharField(max_length=10)
-    status = models.CharField(max_length=20,choices=Role.choices, default=Role.bachelor)
+    status = models.CharField(max_length=20, choices=Role.choices, default=Role.bachelor)
     age = models.PositiveIntegerField(null=True, blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
