@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>Student's data</h1>
+
+    <ul>
+
+        <li>First name: {{student.first_name}}</li>
+        <li>Last name: {{student.last_name}}</li>
+        <li>Username: {{student.username}}</li>
+        <li>Age: {{student.age}}</li>
+
+        {% if student.status == 'b' %}
+        <li>Qaysi bosqich: Bakalavr</li>
+
+        {% elif student.status == 'm'%}
+        <li>Qaysi bosqich: Magistr</li>
+
+        {% else %}
+        <li>Qaysi bosqich: PhD</li>
+
+        {% endif %}
+
+    </ul>
+
+    <a href="{% url 'student' %}">back</a>
+
+</body>
+</html>

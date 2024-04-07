@@ -13,23 +13,39 @@ class AuthorAdmin(ImportExportModelAdmin):
 
 
 @admin.register(Book)
-class AuthorAdmin(ImportExportModelAdmin):
-    list_display = ("id", "title", "description", "price", "author")
-    list_display_links = ("id", "title", "description", "price", "author")
+class BookAdmin(ImportExportModelAdmin):
+    list_display = ("id", "title", "section_description", "price", "author")
+    list_display_links = ("id", "title", "section_description", "price", "author")
     search_fields = ("id", "title")
     search_help_text = f"search in: {' or '.join(search_fields)}"
     ordering = ('title', '-price', 'id')
     autocomplete_fields = ["author"]
 
+    @staticmethod
+    def section_description(obj):
+        if len(obj.description) > 10:
+            return f"{obj.description[:10]}..."
+
+        else:
+            return obj.description
+
 
 @admin.register(Comment)
 class CommentAdmin(ImportExportModelAdmin):
-    list_display = ("id", "user", "book", "text")
-    list_display_links = ("id", "user", "book", "text")
+    list_display = ("id", "user", "book", "section_comment_text")
+    list_display_links = ("id", "user", "book", "section_comment_text")
     search_fields = ("id", "text")
     search_help_text = f"search in: {' or ' .join(search_fields)}"
     ordering = ("id", )
     autocomplete_fields = ["user", "book"]
+
+    @staticmethod
+    def section_comment_text(obj):
+        if len(obj.text) > 10:
+            return f"{obj.text[:10]}..."
+
+        else:
+            return obj.text
 
 
 @admin.register(BookingBook)
