@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.models import  User
+from .forms import UserLoginForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 
 
 class StudentRegisterView(View):
@@ -16,15 +19,14 @@ class StudentRegisterView(View):
         password2 = request.POST["password_2"]
 
         if password1 == password2:
-            user = User(first_name=first_name, last_name=last_name, email=email, username=username, password=password1)
-            user.save()
-
-            """User passwordini qo'shisihda oddiy usulda qo'shildi. Chunki login qilinganda password larni 
-            birga-bir tekshiriladi. Shu sabab hozircha shu usulda qo'shildi. set_password() metodi orqali
-            qo'shsak uni shifrlab qo'yadi va biz uni tekshira olmaymiz. Domla uni djangoning formalar bilan ishlash
-            qismini o'tganimda tushuntiraman dedi."""
-
-            return redirect('landing')
+            user_check = User.objects.filter(username=username)
+            if user_check:
+                return render(request, 'auth_templates/register.html')
+            else:
+                user = User(first_name=first_name, last_name=last_name, email=email, username=username)
+                user.set_password(password1)
+                user.save()
+                return redirect('landing')
 
         else:
             return redirect('register')
@@ -32,16 +34,37 @@ class StudentRegisterView(View):
 
 class StudentLoginView(View):
     def get(self, request):
-        return render(request, "auth_templates/login.html")
+        form = UserLoginForm()
+        context = {
+            "form": form
+        }
+        return render(request, "auth_templates/login.html", context=context)
 
     def post(self, request):
         username = request.POST["username"]
         password = request.POST["password"]
 
-        user = User.objects.filter(username=username, password=password)
+        data = {
+            "username": username,
+            "password": password
+        }
 
-        if user:
+        login_form = AuthenticationForm(data=data)
+
+        if login_form.is_valid():
+            user = login_form.get_user()
+            login(request, user)
             return redirect('landing')
 
         else:
-            return redirect('login')
+            form = UserLoginForm()
+            context = {
+                "form": form
+            }
+            return render(request, 'auth_templates/login.html')
+
+
+class UserLogOutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect("login")
