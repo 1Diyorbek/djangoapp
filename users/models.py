@@ -21,6 +21,7 @@ class User(models.Model):
     status = models.CharField(max_length=20, choices=Role.choices, default=Role.bachelor)
     age = models.PositiveIntegerField(null=True, blank=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="student")
 
     def __str__(self):
         return self.first_name

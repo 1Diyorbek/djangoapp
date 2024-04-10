@@ -14,8 +14,8 @@ class AuthorAdmin(ImportExportModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(ImportExportModelAdmin):
-    list_display = ("id", "title", "section_description", "price", "author")
-    list_display_links = ("id", "title", "section_description", "price", "author")
+    list_display = ("id", "title", "image", "section_description", "price", "author")
+    list_display_links = ("id", "title", "image", "section_description", "price", "author")
     search_fields = ("id", "title")
     search_help_text = f"search in: {' or '.join(search_fields)}"
     ordering = ('title', '-price', 'id')

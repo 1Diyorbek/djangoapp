@@ -5,8 +5,8 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(User)
 class UserAdmin(ImportExportModelAdmin):
-    list_display = ("id", "first_name", "last_name", "username", "status", "age", "address")
-    list_display_links = ("id", "first_name", "last_name", "username", "status", "age", "address")
+    list_display = ("id", "first_name", "last_name", "image", "username", "status", "age", "address")
+    list_display_links = ("id", "first_name", "last_name", "image", "username", "status", "age", "address")
     search_fields = ('id', 'first_name', "last_name")
     search_help_text = f'write only id, first_name, lastname'
     ordering = ('first_name', 'last_name', 'id')
